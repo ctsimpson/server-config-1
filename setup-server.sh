@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ssinclude-1
+source ssinclude-1.sh
 
 # Variables
 DB_PASSWORD="p@ssw0rd"
