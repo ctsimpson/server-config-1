@@ -25,7 +25,7 @@ select rubyver in "Ruby 1.9.2" "Ruby 1.9.3"; do
 done
 
 echo "What version of Rails should we install?"
-select railsver in "3.2.3" "3.2.8"; do
+select railsver in "3.2.8" "3.2.11"; do
     case $railsver in
         '3.2.8' ) RAILS_VERSION="3.2.8"; break;;
         '3.2.11') RAILS_VERSION="3.2.11"; break;;
