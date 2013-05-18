@@ -8,11 +8,11 @@ DB_NAME=""
 DB_USER=""
 DB_USER_PASSWORD=""
 RUBY_VERSION="ruby-1.9.3-p392"
-GEMS_TO_INSTALL1="mysql,unicorn,bundler"
+GEMS_TO_INSTALL1="mysql,unicorn,bundler,rake"
 RAILS_VERSION="3.2.11"
 
 while true; do
-    read -p "MySQL root Password :" DB_PASSWORD
+    read -p "MySQL password you want to use :" DB_PASSWORD
 	break;
 done
 
