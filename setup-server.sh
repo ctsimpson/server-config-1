@@ -7,9 +7,9 @@ DB_PASSWORD="p@ssw0rd"
 DB_NAME=""
 DB_USER=""
 DB_USER_PASSWORD=""
-RUBY_VERSION="ruby-1.9.3-p392"
+RUBY_VERSION="ruby-2.0.0-p353"
 GEMS_TO_INSTALL1="mysql,unicorn,bundler,rake"
-RAILS_VERSION="3.2.11"
+RAILS_VERSION="3.2.14"
 
 while true; do
     read -p "MySQL password you want to use :" DB_PASSWORD
@@ -17,18 +17,20 @@ while true; do
 done
 
 echo "What version of Ruby should we install?"
-select rubyver in "Ruby 1.9.2" "Ruby 1.9.3"; do
+select rubyver in "Ruby 1.9.3" "Ruby 2.0.0" "Ruby Skip"; do
     case $rubyver in
-        'Ruby 1.9.2' ) RUBY_VERSION="ruby-1.9.2-rc2"; break;;
-        'Ruby 1.9.3' ) RUBY_VERSION="ruby-1.9.3-p392"; break;;
+        'Ruby 1.9.3' ) RUBY_VERSION="ruby-1.9.3-p484"; break;;
+        'Ruby 2.0.0' ) RUBY_VERSION="ruby-2.0.0-p353"; break;;
+        'Ruby Skip' ) RUBY_VERSION="SKIP"; break;;
     esac
 done
 
 echo "What version of Rails should we install?"
-select railsver in "3.2.8" "3.2.11"; do
+select railsver in "3.2.11" "3.2.14" "4.0.0"; do
     case $railsver in
-        '3.2.8' ) RAILS_VERSION="3.2.8"; break;;
         '3.2.11') RAILS_VERSION="3.2.11"; break;;
+        '3.2.14') RAILS_VERSION="3.2.14"; break;;
+        '4.0.0') RAILS_VERSION="4.0.0"; break;;
     esac
 done
 
@@ -79,10 +81,10 @@ then
 	echo "Downloading: (from calling wget ftp://ftp.ruby-lang.org/pub/ruby/1.9/$RUBY_VERSION.tar.gz)" >> $logfile
 echo "" >> $logfile
 	wget ftp://ftp.ruby-lang.org/pub/ruby/1.9/$RUBY_VERSION.tar.gz  >> $logfile
-else
-	echo "Downloadin: (from calling wget ftp://ftp.ruby-lang.org/pub/ruby/1.8/$RUBY_VERSION.tar.gz)" >> $logfile
+elif [[ $RUBY_VERSION == ruby\-2\.0* ]]
+    echo "Downloadin: (from calling wget ftp://ftp.ruby-lang.org/pub/ruby/2.0/$RUBY_VERSION.tar.gz)" >> $logfile
 echo "" >> $logfile
-	wget ftp://ftp.ruby-lang.org/pub/ruby/1.8/$RUBY_VERSION.tar.gz  >> $logfile
+    wget ftp://ftp.ruby-lang.org/pub/ruby/2.0/$RUBY_VERSION.tar.gz  >> $logfile    
 fi
 
 echo ""
@@ -113,21 +115,21 @@ cd /
 rm -rf $RUBY_VERSION
 
 echo "" >> $logfile
-echo "Downloading Ruby Gems with wget http://production.cf.rubygems.org/rubygems/rubygems-2.0.3.tgz" >> $logfile
+echo "Downloading Ruby Gems with wget http://production.cf.rubygems.org/rubygems/rubygems-2.1.7.tgz" >> $logfile
 echo "" >> $logfile
-wget http://production.cf.rubygems.org/rubygems/rubygems-2.0.3.tgz >> $logfile
+wget http://production.cf.rubygems.org/rubygems/rubygems-2.1.7.tgz >> $logfile
 
 echo ""
 echo "tar output:"
-tar xzvf rubygems-2.0.3.tgz  >> $logfile
-rm rubygems-2.0.3.tgz
+tar xzvf rubygems-2.1.7.tgz  >> $logfile
+rm rubygems-2.1.7.tgz
 
 echo ""
 echo "rubygems setup:"
-cd rubygems-2.0.3
+cd rubygems-2.1.7
 ruby setup.rb >> $logfile
 cd /
-rm -rf rubygems-2.0.3
+rm -rf rubygems-2.1.7
 
 #install rails
 gem install rails -v $RAILS_VERSION --no-ri --no-rdoc >> $logfile
