@@ -77,11 +77,12 @@ echo "$RUBY_VERSION" >> $logfile
 
 echo "" >> $logfile
 if [[ $RUBY_VERSION == ruby\-1\.9* ]]
-then
+    then
 	echo "Downloading: (from calling wget ftp://ftp.ruby-lang.org/pub/ruby/1.9/$RUBY_VERSION.tar.gz)" >> $logfile
 echo "" >> $logfile
 	wget ftp://ftp.ruby-lang.org/pub/ruby/1.9/$RUBY_VERSION.tar.gz  >> $logfile
 elif [[ $RUBY_VERSION == ruby\-2\.0* ]]
+    then
     echo "Downloadin: (from calling wget ftp://ftp.ruby-lang.org/pub/ruby/2.0/$RUBY_VERSION.tar.gz)" >> $logfile
 echo "" >> $logfile
     wget ftp://ftp.ruby-lang.org/pub/ruby/2.0/$RUBY_VERSION.tar.gz  >> $logfile    
